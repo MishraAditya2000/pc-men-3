@@ -22,7 +22,7 @@ const id=req.params.id;
     }
 }
 
-//SHOW PRODUCTs API FOR USER PAGES
+//SHOW PRODUCTs API FOR ADMIN PAGES
 export const getPost=async(req,res)=>{
     try{
         const post=await productDetails.find();
@@ -32,6 +32,24 @@ export const getPost=async(req,res)=>{
         console.log(error.message);
     }
 }
+
+
+
+
+//-------------------------------------------------USER APIs-------------------------------------------------------------------
+
+
+
+export const ourPicks=async(req,res)=>{
+    try {
+        const post=await productDetails.find({availability:"In Stock",ourpicks:"Yes"});
+        res.status(200).json(post);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
 // SHOW PRODUCT DETAILS IN SINGLE PAGE
 export const getProduct=async(req,res)=>{
     try {

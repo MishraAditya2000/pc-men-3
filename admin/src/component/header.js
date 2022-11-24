@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {AppBar,Typography,Toolbar,Tabs,Tab,Button,useMediaQuery,useTheme} from "@mui/material";
+import {AppBar,Typography,Toolbar,Tabs,Tab,Button} from "@mui/material";
 import ComputerIcon from '@mui/icons-material/Computer';
 // import Drawercomp from "./drawer";
 import { BrowserRouter as Router,Routes,Route,Link } from "react-router-dom";
@@ -16,7 +16,6 @@ import Service from "../pages/Service";import Addproduct from "../pages/Addprodu
 
 
 const Header=()=>{
-    const theme=useTheme();
     const routes=["/","/products","/orderservice","/orderspc","/addproduct"]
     const handleChange=(e,newvalue)=>{SetValue(newvalue)}
     const [value,SetValue]=useState(false);

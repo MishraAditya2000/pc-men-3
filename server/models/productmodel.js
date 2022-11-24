@@ -4,8 +4,10 @@ const productSchema=mongoose.Schema({
     productname:String,
     subtitle:String,
     category:String,
+    prodtimage:String,
     availability:String,
     price:Number,
+    ourpicks:String,
     basicspecs:{
         motherboard:String,
         processor:String,
