@@ -6,8 +6,10 @@ import orderservice from "../models/serviceorder.js";
 export const serviceRequest=async(req,res)=>{
     const service=req.body;
     try {
-        const servicerequest=await orderservice(service).save;
+        const servicerequest=await orderservice(service).save();
         res.status(201).json(servicerequest);
+        // res.body(alert(servicerequest._id));
+        
     } catch (error) {
         console.log(error.message);
     }

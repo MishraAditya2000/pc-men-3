@@ -49,6 +49,14 @@ export const ourPicks=async(req,res)=>{
     }
 }
 
+export const allProducts=async(req,res)=>{
+    try {
+        const post=await productDetails.find({availability:"In Stock"});
+        res.status(200).json(post);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 // SHOW PRODUCT DETAILS IN SINGLE PAGE
 export const getProduct=async(req,res)=>{

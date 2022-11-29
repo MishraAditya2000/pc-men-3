@@ -6,7 +6,10 @@ const orderService=mongoose.Schema({
     user_mob:String,
     address:String,
     issue:String,
-    issuedate:Date
+    issuedate:{
+        type:Date,
+        default:new Date()
+    }
 })
 
 const orderservice=mongoose.model("orderservice",orderService);

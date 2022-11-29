@@ -9,6 +9,8 @@ import { BrowserRouter as Router,Routes,Route,Link } from "react-router-dom";
 import AboutUs from "../pages/Aboutus";
 import Prebuiltpc from "../pages/Prebuiltpc";
 import Home from "../pages/Home";
+import { ProductDetails } from "../pages/ProductDetails";
+import { Ordersuccess } from "../pages/Ordersuccess";
 
 const Header=()=>{
     const [value,SetValue]=useState(false);
@@ -37,7 +39,7 @@ const Header=()=>{
                         <Tabs  textColor="inherit" sx={{marginLeft:"auto"}} value={value} onChange={handleChange} indicatorColor="primary">
                             <Tab label="Home" to={routes[0]} component={Link}/>
                             <Tab label="Pre-Built PC" to={routes[1]} component={Link}/>
-                            <Tab label="Orde a Service" to=":service" component={Link}/>
+                            <Tab label="Orde a Service" to="/#service" component={Link}/>
                             <Tab label="About Us" to={routes[3]} component={Link} />
         
                             <Button variant="contained" sx={{marginLeft:"auto"}}>Log In</Button>
@@ -56,6 +58,9 @@ const Header=()=>{
                             <Route path="/prebuiltpc" element={<Prebuiltpc/>}/>
                             <Route path="#service" element={<Home/>}/>
                             <Route path="/aboutus" element={<AboutUs/>}/>
+                            <Route path="/details/:productId" element={<ProductDetails/>}/>
+                            <Route path="/ordersuccessful" element={<Ordersuccess/>}/>
+
                             
                 </Routes> 
             </React.Fragment>
