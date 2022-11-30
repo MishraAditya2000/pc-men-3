@@ -6,3 +6,4 @@ export const ourPicks=()=>API.get("/getPost/ourpicks");
 export const fetchProduct=()=>API.get("/allproducts");
 export const productDetails=(id)=>API.get(`/getproduct/${id}`);
 export const requestService=(serviceData)=>API.post("/requestservice",serviceData);
+export const orderProduct=(product)=>API.post("/addorder",product);

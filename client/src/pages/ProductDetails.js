@@ -1,8 +1,8 @@
-import { Card, CardContent, CardMedia, Container,Grid, Typography,Paper, FormControl,Select,MenuItem,OutlinedInput,InputLabel } from '@mui/material';
+import { Box,Card, CardContent, CardMedia, Container,Grid, Typography,Paper, FormControl,Select,MenuItem,OutlinedInput,InputLabel, TextField, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { productDetails } from '../redux/features/userSlice';
+import { orderProduct, productDetails } from '../redux/features/userSlice';
 
 export const ProductDetails = () => {
     const dispatch=useDispatch();
@@ -10,8 +10,10 @@ export const ProductDetails = () => {
     useEffect(()=>{
         console.log("Calling");
         dispatch(productDetails(productId))
+        
     },[]);
 
+    
     const products=useSelector((state)=>state.userView.selectedProduct);
     const [product,setProduct]=useState({
       productid:products?._id,
@@ -19,26 +21,51 @@ export const ProductDetails = () => {
       productsubtitle:products.subtitle,
       prodtimg:products.prodtimage,
       basicspecs:products.basicspecs,
-      ram:"",//name add
-      storage:"",//name add
-      oldprice:products.price,
-      newprice:products.price,//price change
-      os:"",
+      ram:products?.customspecs?.ram?.default?.kit,
+      storage:products?.customspecs?.storage?.default?.size,
+      price:products.price,
+      status:"Booked",
+      userdetails:{
+        name:"",
+        mail:"",
+        mob:"",
+        address:"",
+        pin:""
+      }
     });
-
-
-    function selectRam(e){
-      const val=e.target.value;
-      console.log(val);
-      console.log(e.target.name);
-      // setProduct(...product,ram:e.target.value); setproduct karile kn error show karu thila ki->error kichhi nai features add kemiti heba mu thik se jani paruni
-    }
-    function ramPrice(e){
+    
+    
+    useEffect(()=>{
       
-    }
+      const newP=JSON.parse(localStorage.getItem("details"));
+      if(newP){
+        setProduct((prev)=>({...prev,...newP}))
+      }
+      
+    },[])
+    useEffect(()=>{
+      localStorage.setItem("details",JSON.stringify(product))
+    },[product])
+    
+    function placeOrder(){
+      dispatch(orderProduct(product));
+      clear()
+      alert("Order Successful");
 
-  return (
-        <Container>
+    }
+    function clear(){
+      setProduct({
+        userdetails:{
+          name:"",
+          mail:"",
+          mob:"",
+          address:"",
+          pin:""
+        }
+      });
+    }
+    return (
+      <Container>
         <div sx={{mt:"40px"}}>ProductDetails:{productId}</div>
         {console.log(product)}
         {products?
@@ -46,10 +73,9 @@ export const ProductDetails = () => {
        
          <Typography variant="h6" text="text.secondary" sx={{marginTop:"8px",marginBottom:"8px"}}>Pre-Built PC-{products.category}</Typography>
         <Grid container spacing={4}>
-        <Grid item>
-            
-        <Card>
-            <CardMedia component="img" image={products.prodtimage} height="380px"/>
+        <Grid item align="center">      
+        <Card elevation={4}>
+            <CardMedia component="img" image={products.prodtimage} height="340px"/>
         </Card>
         </Grid>
         <Grid item>
@@ -57,15 +83,19 @@ export const ProductDetails = () => {
             <CardContent>
                 <Typography variant="h5" >Lenovo Desktop-{products.productname}</Typography>
                 <Typography variant="subtitle2" >{products.subtitle}</Typography>
-                <Typography variant="h6">Price:{product.oldprice}/- + (Free Shipping)</Typography> here also               
-                <Typography variant="h6" >Base Specification:</Typography>
+                <Typography variant="h6">Price:{products.price}/- + (Free Shipping)</Typography>            
+            </CardContent>
+            <CardContent>
+            <Typography variant="h6" >Base Specification:</Typography>
                 <Typography variant="body1">Motherboard:{products?.basicspecs?.motherboard}</Typography>
                 <Typography variant="body1">Processor:{products?.basicspecs?.processor}</Typography>
                 <Typography variant="body1">chipset:{products?.basicspecs?.chipset}</Typography>
                 <Typography variant="body1">Graphic:{products?.basicspecs?.graphic}</Typography>
+                <Typography variant="body1">RAM:{products?.customspecs?.ram?.default?.kit}</Typography>
+                <Typography variant="body1">Storage:{products?.customspecs?.storage?.default?.size}</Typography>
             </CardContent>
         </Card>
-        <Paper sx={{mr:"8px",mb:"8px",mt:"8px"}} align="center"><Typography variant="h5">Customize Your PC</Typography></Paper>
+        {/* <Paper sx={{mr:"8px",mb:"8px",mt:"8px"}} align="center"><Typography variant="h5">Customize Your PC</Typography></Paper>
         <FormControl fullWidth sx={{marginTop:"8px",marginBottom:"8px"}}>
         <InputLabel>RAM</InputLabel>
         <Select
@@ -101,7 +131,59 @@ export const ProductDetails = () => {
           <MenuItem value="Windows 11">Windows 11 22H2</MenuItem>
 
           </Select>
+        </FormControl> */}
+
+        <Paper  sx={{mb:"12px",mt:"12px"}} align="center"><Typography variant="h5">One Step Checkout</Typography></Paper>
+
+        <FormControl fullWidth>
+        <TextField name="name"
+            variant="outlined"
+            label="Name"
+            value={product.userdetails.name} fullWidth
+            onChange={(e)=>setProduct({...product,userdetails:{...product?.userdetails,name:e.target.value}})}
+            type="text"
+            sx={{"& label": {fontSize: "18px"},marginTop:"8px",marginBottom:"8px"}}
+            />
+
+            <TextField name="Email"
+            variant="outlined"
+            label="Email"
+            value={product.userdetails.mail} fullWidth
+            onChange={(e)=>setProduct({...product,userdetails:{...product?.userdetails,mail:e.target.value}})}
+            type="text"
+            sx={{"& label": {fontSize: "18px"},marginTop:"8px",marginBottom:"8px"}}
+            />
+
+            <TextField name="Mobile No."
+            variant="outlined"
+            label="Mobile No."
+            value={product.userdetails.mob} fullWidth
+            onChange={(e)=>setProduct({...product,userdetails:{...product?.userdetails,mob:e.target.value}})}
+            type="number"
+            sx={{"& label": {fontSize: "18px"},marginTop:"8px",marginBottom:"8px"}}
+            />
+
+          <TextField name="Address."
+            variant="outlined"
+            label="Address"
+            value={product.userdetails.address} 
+            onChange={(e)=>setProduct({...product,userdetails:{...product?.userdetails,address:e.target.value}})}
+            type="text"
+            sx={{"& label": {fontSize: "18px"},marginTop:"8px",marginBottom:"8px"}}
+            rows={4}
+            multiline
+            />
+            <TextField name="PIN"
+            variant="outlined"
+            label="PIN"
+            value={product.userdetails.pin}
+            onChange={(e)=>setProduct({...product,userdetails:{...product?.userdetails,pin:e.target.value}})}
+            />
         </FormControl>
+        <Box align="center" sx={{marginTop:"12px"}}>
+        <Button  onClick={placeOrder} variant="contained" sx={{marginRight:"8px"}}>Place Order</Button>
+        <Button onClick={clear} variant="outlined" sx={{marginLeft:"8px"}}>Clear</Button>
+        </Box>
         </Grid>
         </Grid>
         </>:null}

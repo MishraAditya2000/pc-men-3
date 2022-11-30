@@ -6,6 +6,7 @@ const orderService=mongoose.Schema({
     user_mob:String,
     address:String,
     issue:String,
+    status:String,
     issuedate:{
         type:Date,
         default:new Date()

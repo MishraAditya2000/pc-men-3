@@ -7,6 +7,7 @@ const initialState={
     selectedProduct:[],
     serviceForm:[],
     filterCat:"All",
+    order:[],
     error:''
 }
 
@@ -32,6 +33,16 @@ export const productDetails=createAsyncThunk("user/productDetails",async(id)=>{
     try {
         console.log("Passed ID:",id);
         const response=await api.productDetails(id);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+export const orderProduct=createAsyncThunk("user/orderProduct",async(product)=>{
+    try {
+        const response=await api.orderProduct(product);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -112,6 +123,17 @@ const userSlice=createSlice({
             state.error=action.error.message;
         })//POST SERVICE REQUEST
 
+        builder.addCase(orderProduct.pending,(state)=>{
+            state.loading="true";
+        })
+        builder.addCase(orderProduct.fulfilled,(state,action)=>{
+            state.order=action.payload;
+            state.loading="false";
+        })
+        builder.addCase(orderProduct.rejected,(state,action)=>{
+            state.loading="true";
+            state.error=action.error.message;
+        })//POST PRODUCT ORDER TO DATABASE
 
 
     }

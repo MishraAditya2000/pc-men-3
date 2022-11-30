@@ -7,6 +7,8 @@ const initialState={
     selectedProduct:[],
     filterCat:"all",
     filterStock:"all",
+    filterStatus:"all",
+    services:[],
     error:''
 }
 
@@ -39,6 +41,15 @@ try {
 }
 })
 
+export const showService=createAsyncThunk('product/showService',async()=>{
+    try {
+        const response= await api.showService();
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 const productSlice=createSlice({
     name:'user',
     initialState,
@@ -48,6 +59,9 @@ const productSlice=createSlice({
         },
         updateCat:(state,action)=>{
             state.filterCat=action.payload;
+        },
+        updateStatus:(state,action)=>{
+            state.filterStatus=action.payload;
         }
     },
     extraReducers:builder=>{
@@ -98,8 +112,24 @@ const productSlice=createSlice({
                     state.selectedProduct=[]
                     state.error=action.error.message
                 })
+                
+                //SHOW SERVICES
+                builder.addCase(showService.pending,(state)=>{
+                    state.loading=true
+                })
+                builder.addCase(showService.fulfilled,(state,action)=>{
+                    state.loading=false
+                    state.services=action.payload
+                    state.error=''
+                })
+                builder.addCase(showService.rejected,(state,action)=>{
+                    state.loading=false
+                    state.services=[]
+                    state.error=action.error.message
+                })
+
     }
 })
 
 export default productSlice.reducer;
-export const {updateStock,updateCat}=productSlice.actions;
+export const {updateStock,updateCat,updateStatus}=productSlice.actions;
