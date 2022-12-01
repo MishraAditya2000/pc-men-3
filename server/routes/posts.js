@@ -1,4 +1,5 @@
 import express from "express";
+import { userLogin, userRegister } from "../controller/auth.js";
 import { serviceRequest, showService } from "../controller/orderservice.js";
 import { addOrder,showOrder } from "../controller/productorder.js";
 import { getPost,addProduct,deleteProduct, getProduct, ourPicks, allProducts} from "../controller/products.js";
@@ -21,5 +22,9 @@ router.get('/allproducts',allProducts);
 //service route
 router.post('/requestservice',serviceRequest);
 router.get('/orderedservice',showService);
+
+//Authentication Routes
+router.post('/login',userLogin);
+router.post('/register',userRegister);
 
 export default router;

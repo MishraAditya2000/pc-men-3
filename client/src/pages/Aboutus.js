@@ -1,7 +1,7 @@
 import { Card, CardContent, Grid, Paper, Typography,Box } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-const AboutUs=()=>{
+const AboutUs=({setLoginUser})=>{
     return(
         <Container sx={{mt:"18px"}}>
             <Paper elevation={4} sx={{paddingBottom:"18px",paddingTop:"18px"}}>

@@ -11,9 +11,12 @@ import Prebuiltpc from "../pages/Prebuiltpc";
 import Home from "../pages/Home";
 import { ProductDetails } from "../pages/ProductDetails";
 import { Ordersuccess } from "../pages/Ordersuccess";
+import Login from "../pages/login/login";
+import Register from "../pages/register/register";
 
 const Header=()=>{
     const [value,SetValue]=useState(false);
+    const [ user, setLoginUser] = useState({})
     const theme=useTheme();
     const isMatch=useMediaQuery(theme.breakpoints.down('lg'));
     const routes=["/","/prebuiltpc","/orderservice","/aboutus"]
@@ -41,9 +44,9 @@ const Header=()=>{
                             <Tab label="Pre-Built PC" to={routes[1]} component={Link}/>
                             <Tab label="Orde a Service" to="/#service" component={Link}/>
                             <Tab label="About Us" to={routes[3]} component={Link} />
-        
-                            <Button variant="contained" sx={{marginLeft:"auto"}}>Log In</Button>
-                            <Button variant="contained" sx={{marginLeft:"8px"}}>Sign Up</Button>
+                            {user && user._id?<Button onClick={() => setLoginUser({})} variant="contained" sx={{marginLeft:"auto"}}>Log Out</Button>:null
+                            }
+                
                         </Tabs>
 
                         )                            
@@ -54,14 +57,19 @@ const Header=()=>{
                 </AppBar>
                 <Routes>
 
-                            <Route path="/" element={<Home/>}/>
-                            <Route path="/prebuiltpc" element={<Prebuiltpc/>}/>
+                            <Route  path="/"
+                            element={
+                                user && user._id?<Home setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>
+                            }
+                            />
+                            <Route path="/prebuiltpc" element={
+                            user&&user._id?<Prebuiltpc setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>}/>
                             <Route path="#service" element={<Home/>}/>
                             <Route path="/aboutus" element={<AboutUs/>}/>
                             <Route path="/details/:productId" element={<ProductDetails/>}/>
                             <Route path="/ordersuccessful" element={<Ordersuccess/>}/>
-
-                            
+                            <Route path="/login" element={<Login setLoginUser={setLoginUser}/>} />
+                            <Route path="/register" element={<Register/>}/>
                 </Routes> 
             </React.Fragment>
         </div>

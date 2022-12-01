@@ -53,7 +53,7 @@ const Home=()=> {
                                     Price:{product.price}/-
                                    </Typography>
                                  </CardContent>
-                                 <CardActions>
+                                 <CardActions align="center">
                                  {/* <Link to={`/details/${products._id}`}>View Details</Link> */}
                                  <Button component={Link} to={`/details/${product._id}`} >View Details</Button>
                                </CardActions>
