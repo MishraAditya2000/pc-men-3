@@ -9,9 +9,9 @@ import { BrowserRouter as Router,Routes,Route,Link } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Orderedpc from "../pages/Orderedpc";
 import Products from "../pages/Products";
-import Service from "../pages/Service";import Addproduct from "../pages/Addproduct";
-;
-
+import Service from "../pages/Service";
+import Addproduct from "../pages/Addproduct";
+import Login from "../pages/Login/login.js";
 
 
 
@@ -19,6 +19,7 @@ const Header=()=>{
     const routes=["/","/products","/orderservice","/orderspc","/addproduct"]
     const handleChange=(e,newvalue)=>{SetValue(newvalue)}
     const [value,SetValue]=useState(false);
+    const [ user, setLoginUser] = useState({})
     
     return(
         <div>
@@ -43,8 +44,7 @@ const Header=()=>{
                             <Tab label="Ordered Service" to={routes[2]} component={Link}/>
                             <Tab label="Ordered PC" to={routes[3]} component={Link}/>
         
-                            <Button variant="contained" sx={{marginLeft:"auto"}}>Log In</Button>
-                            <Button variant="contained" sx={{marginLeft:"8px"}}>Sign Up</Button>
+                            {user && user._id?<Button onClick={() => setLoginUser({})} variant="contained" sx={{marginLeft:"auto"}}>Log Out</Button>:null}
                         </Tabs>
 
 
@@ -53,11 +53,15 @@ const Header=()=>{
                 </AppBar>
                 <Routes>
 
-                            <Route path="/" element={<Dashboard/>}/>
-                            <Route path="/products" element={<Products/>}/>
-                            <Route path="/orderspc" element={<Orderedpc/>}/>
-                            <Route path="/orderservice" element={<Service/>}/>
+                            <Route path="/" element={
+                             user && user._id?<Dashboard setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>    
+                            
+                            }/>
+                            <Route path="/products" element={user && user._id?<Products setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>}/>
+                            <Route path="/orderspc" element={user && user._id?<Orderedpc setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>}/>
+                            <Route path="/orderservice" element={user && user._id?<Service setLoginUser={setLoginUser}/>:<Login setLoginUser={setLoginUser}/>}/>
                             <Route path="/products/addproduct" element={<Addproduct/>}/>
+                            <Route path="/login" element={<Login setLoginUser={setLoginUser}/>}/>
                             
                 </Routes> 
             </React.Fragment>
