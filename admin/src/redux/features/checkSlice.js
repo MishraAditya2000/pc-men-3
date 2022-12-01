@@ -5,10 +5,11 @@ const initialState={
     loading:false,
     products:[],
     selectedProduct:[],
+    services:[],
+    orders:[],
     filterCat:"all",
     filterStock:"all",
     filterStatus:"all",
-    services:[],
     error:''
 }
 
@@ -41,6 +42,16 @@ try {
 }
 })
 
+export const showOrders=createAsyncThunk('product/showOrders',async()=>{
+    try{
+        const response= await api.showOrders();
+        return response.data;
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
 export const showService=createAsyncThunk('product/showService',async()=>{
     try {
         const response= await api.showService();
@@ -65,7 +76,7 @@ const productSlice=createSlice({
         }
     },
     extraReducers:builder=>{
-        //FETCH ALL USER DETAILS
+        //FETCH ALL USER DETAILS------------------------------------------------------------------------------------------------------------
         builder.addCase(fetchProducts.pending,(state)=>{
             state.loading=true
         })
@@ -78,9 +89,9 @@ const productSlice=createSlice({
             state.loading=false
             state.products=[]
             state.error=action.error.message
-        })//FETCH ALL PRODUCTs
+        })//FETCH ALL PRODUCTs-----------------------------------------------------------------------------------------------------------------
 
-                //DELETE PRODUCT FROM DATABASE
+                //DELETE PRODUCT FROM DATABASE-------------------------------------------------------------------------------------------------
                 builder.addCase(deleteProduct.pending,(state)=>{
                     state.loading=true
                 })
@@ -96,9 +107,9 @@ const productSlice=createSlice({
                     state.loading=false
                     state.products=[]
                     state.error=action.error.message
-                })//DELETE PRODUCT FROM DATABASE
+                })//DELETE PRODUCT FROM DATABASE------------------------------------------------------------------------------------------------
 
-                //ADD PRODUCT TO DATABASE
+                //ADD PRODUCT TO DATABASE-------------------------------------------------------------------------------------------------------
                 builder.addCase(addProduct.pending,(state)=>{
                     state.loading=true
                 })
@@ -111,9 +122,9 @@ const productSlice=createSlice({
                     state.loading=false
                     state.selectedProduct=[]
                     state.error=action.error.message
-                })
+                })///ADD PRODUCT TO DATABASE-----------------------------------------------------------------------------------------------------=
                 
-                //SHOW SERVICES
+                //SHOW SERVICES------------------------------------------------------------------------------------------------------------------
                 builder.addCase(showService.pending,(state)=>{
                     state.loading=true
                 })
@@ -126,7 +137,21 @@ const productSlice=createSlice({
                     state.loading=false
                     state.services=[]
                     state.error=action.error.message
+                })//SHOW SERVICES------------------------------------------------------------------------------------------------------------------
+
+                //SHOW PC ORDERS----------------------------------------------------------------------------------------------------------------
+                builder.addCase(showOrders.pending,(state)=>{
+                    state.loading=true
                 })
+                builder.addCase(showOrders.fulfilled,(state,action)=>{
+                    state.loading=false
+                    state.orders=action.payload
+                    state.error=''
+                })
+                builder.addCase(showOrders.rejected,(state,action)=>{
+                    state.loading=false
+                    state.error=action.error.message
+                })//SHOW PC ORDERS----------------------------------------------------------------------------------------------------------------
 
     }
 })
