@@ -51,6 +51,7 @@ const Addproduct  = () => {
   function handleSubmit() {
    dispatch(addProduct(newProduct));
    handleClear();
+   alert("Product Added Successfully");
   }
   function handleClear(){
     setNewProduct({
@@ -255,7 +256,7 @@ const Addproduct  = () => {
                             ram:{...newProduct.customspecs.ram,
                             default:{...newProduct.customspecs.ram.default,kit:e.target.value}}}})}}
               />
-              <TextField 
+              {/* <TextField 
               label="Price"
               sx={customSpecsStyle}
               value={newProduct.customspecs.ram.default.price}
@@ -263,52 +264,13 @@ const Addproduct  = () => {
                             customspecs:{...newProduct.customspecs,
                             ram:{...newProduct.customspecs.ram,
                             default:{...newProduct.customspecs.ram.default,price:e.target.value}}}})}}
-              />
+              /> */}
 
 
               
           </Grid>
-          <Grid item md={6}>
-          <TextField 
-              label="Option 1"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.ram.option1.kit}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                            customspecs:{...newProduct.customspecs,
-                            ram:{...newProduct.customspecs.ram,
-                            option1:{...newProduct.customspecs.ram.option1,kit:e.target.value}}}})}}
-              />
-              <TextField 
-              label="Price"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.ram.option1.price}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                            customspecs:{...newProduct.customspecs,
-                            ram:{...newProduct.customspecs.ram,
-                            option1:{...newProduct.customspecs.ram.option1,price:e.target.value}}}})}}
-              />
+         
           </Grid>
-          <Grid item md={6}>
-          <TextField 
-              label="Option 2"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.ram.option2.kit}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                            customspecs:{...newProduct.customspecs,
-                            ram:{...newProduct.customspecs.ram,
-                            option2:{...newProduct.customspecs.ram.option2,kit:e.target.value}}}})}}
-              />
-              <TextField 
-              label="Price"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.ram.option2.price}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                            customspecs:{...newProduct.customspecs,
-                            ram:{...newProduct.customspecs.ram,
-                            option2:{...newProduct.customspecs.ram.option2,price:e.target.value}}}})}}
-              />
-          </Grid>
-            </Grid>
           </Grid>
           <Grid item md={6}>
           <Typography variant="h6">Storage</Typography>
@@ -325,7 +287,7 @@ const Addproduct  = () => {
                             default:{...newProduct.customspecs.storage.default,size:e.target.value}}}})}}
               
               />
-              <TextField 
+              {/* <TextField 
               label="Price"
               sx={customSpecsStyle}
               value={newProduct.customspecs.storage.default.price}
@@ -333,29 +295,9 @@ const Addproduct  = () => {
                             customspecs:{...newProduct.customspecs,
                             storage:{...newProduct.customspecs.storage,
                             default:{...newProduct.customspecs.storage.default,price:e.target.value}}}})}}
-              />
+              /> */}
 
               
-          </Grid>
-          <Grid item md={6}>
-          <TextField 
-              label="Option 1"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.storage.option1.size}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                            customspecs:{...newProduct.customspecs,
-                            storage:{...newProduct.customspecs.storage,
-                            option1:{...newProduct.customspecs.storage.option1,size:e.target.value}}}})}}
-              />
-              <TextField 
-              label="Price"
-              sx={customSpecsStyle}
-              value={newProduct.customspecs.storage.option1.price}
-              onChange={(e)=>{setNewProduct({...newProduct,
-                customspecs:{...newProduct.customspecs,
-                storage:{...newProduct.customspecs.storage,
-                option1:{...newProduct.customspecs.storage.option1,price:e.target.value}}}})}}
-              />
           </Grid>
           {/* <Grid item md={6}>
           <TextField 

@@ -7,6 +7,7 @@ const initialState={
     selectedProduct:[],
     services:[],
     orders:[],
+    update:[],
     filterCat:"all",
     filterStock:"all",
     filterStatus:"all",
@@ -57,6 +58,44 @@ export const showService=createAsyncThunk('product/showService',async()=>{
         const response= await api.showService();
         return response.data;
     } catch (error) {
+        console.log(error);
+    }
+})
+export const productUpdate=createAsyncThunk('product/productUpdate',async({id,stock})=>{
+    try{
+        console.log(id);
+        console.log(stock);
+        const response=await api.productUpdate(id,stock);
+        console.log(response);
+        return response.data;
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
+export const orderUpdate=createAsyncThunk('product/orderUpdate',async({id,status})=>{
+    try{
+        console.log(id);
+        console.log(status);
+        const response=await api.ordertUpdate(id,status);
+        console.log(response);
+        return response.data;
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
+export const serviceUpdate=createAsyncThunk('product/serviceUpdate',async({id,status})=>{
+    try{
+        console.log(id);
+        console.log(status);
+        const response=await api.serviceUpdate(id,status);
+        console.log(response);
+        return response.data;
+    }
+    catch(error){
         console.log(error);
     }
 })

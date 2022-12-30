@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, Grid,Link,List,ListItem,Paper, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid,List,ListItem,Paper, Typography,Button } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer=()=>{
     return(
          <Container maxWidth='xl' sx={{marginTop:"18px",paddingTop:"18px",borderTop:1,borderWidth:"64px",borderColor:"#1976D2"}}>
@@ -36,9 +36,10 @@ const Footer=()=>{
                     <CardContent>  
                     <Typography variant="h4">My Orders</Typography>    
                     <List>  
-                        <Link   style={{ textDecoration: 'none' }}><ListItem>Track Order</ListItem></Link>
-                        <Link   style={{ textDecoration: 'none' }}><ListItem>Order History</ListItem></Link>
-                        <Link   style={{ textDecoration: 'none' }}><ListItem>Service History</ListItem></Link>
+                        <Button component={Link} to="/orderhistory">PC Ordrer History</Button>  
+                    </List>
+                    <List>
+                        <Button component={Link} to="/servicehistory">Service History</Button>  
                     </List>
                     </CardContent>
                 </Card>

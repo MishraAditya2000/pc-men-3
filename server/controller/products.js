@@ -25,7 +25,7 @@ const id=req.params.id;
 //SHOW PRODUCTs API FOR ADMIN PAGES
 export const getPost=async(req,res)=>{
     try{
-        const post=await productDetails.find();
+        const post=await productDetails.find().sort({_id:-1});
         res.status(200).json(post);
     }
     catch(error){
@@ -33,7 +33,17 @@ export const getPost=async(req,res)=>{
     }
 }
 
+export const updateStock=async(req,res)=>{
+    const id=req.params.id;
+    const post=req.body;
+    console.log(id);
+    console.log(post);
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('NO POST WITH THIS ID');
 
+   const updatedPost=await productDetails.findByIdAndUpdate(id,{...post,id},{new:true});
+   res.json(updatedPost);
+
+}
 
 
 //-------------------------------------------------USER APIs-------------------------------------------------------------------

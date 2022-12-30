@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./register.css"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { Container } from "@mui/system"
 
 const Register = () => {
 
@@ -37,6 +38,7 @@ const Register = () => {
     }
 
     return (
+        <Container align="center" sx={{marginTop:"12px"}}>
         <div className="register">
             {console.log("User", user)}
             <h1>Register</h1>
@@ -48,6 +50,7 @@ const Register = () => {
             <div>or</div>
             <div className="button" onClick={() => navigate("/login")}>Login</div>
         </div>
+        </Container>
     )
 }
 

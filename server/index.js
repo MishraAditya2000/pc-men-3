@@ -4,9 +4,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import postRoutes from "./routes/posts.js"
 const app=express();
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({limit:'300mb',extended:true}));
+app.use(cors());
 app.use('/posts',postRoutes);//every routes inside of post routes is goging to start with localhost:5000/posts
 
 

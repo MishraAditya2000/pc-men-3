@@ -66,7 +66,7 @@ export const ProductDetails = () => {
     }
     return (
       <Container>
-        <div sx={{mt:"40px"}}>ProductDetails:{productId}</div>
+        {/* <div sx={{mt:"40px"}}>ProductDetails:{productId}</div> */}
         {console.log(product)}
         {products?
         <>
@@ -83,7 +83,7 @@ export const ProductDetails = () => {
             <CardContent>
                 <Typography variant="h5" >Lenovo Desktop-{products.productname}</Typography>
                 <Typography variant="subtitle2" >{products.subtitle}</Typography>
-                <Typography variant="h6">Price:{products.price}/- + (Free Shipping)</Typography>            
+                <Typography variant="h6">Price:₹{products.price}/- + (Free Shipping)</Typography>            
             </CardContent>
             <CardContent>
             <Typography variant="h6" >Base Specification:</Typography>

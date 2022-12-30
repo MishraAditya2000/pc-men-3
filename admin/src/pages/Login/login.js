@@ -1,8 +1,8 @@
-import React, {useState} from "react"
-import "./login.css"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-
+import React, {useState} from "react";
+import "./login.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {Container} from "@mui/material";
 const Login = ({ setLoginUser}) => {
 
     const navigate = useNavigate()
@@ -32,14 +32,17 @@ const Login = ({ setLoginUser}) => {
     }
 
     return (
+        <Container align="center" sx={{marginTop:"12px"}}>
         <div className="login">
-            <h1>Login</h1>
+            <h1>Admin Login</h1>
             <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
             <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
             <div className="button" onClick={login}>Login</div>
-            <div>or</div>
-            <div className="button" onClick={() => navigate("/register")}>Register</div>
+            {/* <div>or</div>
+            <div className="button" onClick={() => navigate("/register")}>Register</div> */}
         </div>
+        </Container>
+            
     )
 }
 

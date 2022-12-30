@@ -10,7 +10,9 @@ import { ProductList } from '../component/ProductList';
 const Products = () => {
   const product=useSelector((state)=>(state.checking.products));
   const dispatch=useDispatch();
-
+  useEffect(()=>{ 
+      dispatch(fetchProducts())
+  },[product]);
   const catStatus=useSelector((state)=>state.checking.filterCat);
   const stockStatus=useSelector((state)=>state.checking.filterStock);
 
@@ -31,10 +33,6 @@ const Products = () => {
   })
 
 
-  useEffect(()=>{
-      
-      dispatch(fetchProducts());
-  },[dispatch]);
   return (
     <Container sx={{marginTop:"12px",marginBottom:"18px"}}>
 
@@ -56,7 +54,6 @@ const Products = () => {
             <ProductList key={product._id} product={product}/>
           )):null
       }
-      {console.log(catStatus)}
       </Paper>
     </Container>
   )

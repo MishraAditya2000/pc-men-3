@@ -13,8 +13,6 @@ import Service from "../pages/Service";
 import Addproduct from "../pages/Addproduct";
 import Login from "../pages/Login/login.js";
 
-
-
 const Header=()=>{
     const routes=["/","/products","/orderservice","/orderspc","/addproduct"]
     const handleChange=(e,newvalue)=>{SetValue(newvalue)}

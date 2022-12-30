@@ -11,7 +11,7 @@ export const addOrder=async(req,res)=>{
 //SHOW ORDERS FROM DATABASE
 export const showOrder=async(req,res)=>{
     try{
-        const orders=await orderDetails.find();
+        const orders=await orderDetails.find().sort({_id:-1});
         res.status(200).json(orders);
     }
     catch(error){
@@ -32,4 +32,34 @@ export const deleteOrder=async(req,res)=>{
     catch(error){
         console.log(error.message);
     }
+}
+//UPDATE ORDER STATUS
+export const updatePCorder=async(req,res)=>{
+    try {
+        const id=req.params.id;
+        const post=req.body;
+    
+        console.log(id);
+        console.log(post);
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('NO POST WITH THIS ID');
+    
+       const updatedPost=await orderDetails.findByIdAndUpdate(id,{...post,id},{new:true});
+       res.json(updatedPost);
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+//ORDER HISTORY
+export const orderHistory=async(req,res)=>{
+    try {        
+        const mail=req.params.mail;
+        console.log(mail);
+        const history= await orderDetails.find({"userdetails.mail":mail}).sort({_id:-1});
+        res.status(200).json(history);
+    } catch (error) {
+        console.log(error);
+    }
+
 }

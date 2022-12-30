@@ -35,7 +35,7 @@ const Home=()=> {
                   <Grid container  spacing={4}>
                     {ourPicks.map((product)=>
                              <Grid key={product._id} item md={6} sm={12}>
-                               <Card sx={{ maxWidth: 345 }}>
+                               <Card sx={{ maxWidth: 345,mt:"8px",mb:"8px"}}>
                                  <CardMedia
                                    component="img"
                                    height="120px"
@@ -59,8 +59,6 @@ const Home=()=> {
                                </CardActions>
                              </Card>
                            </Grid>
-                 
-                 
                  )}
                  </Grid>
 
@@ -73,7 +71,6 @@ const Home=()=> {
                 
                 </Container >                
             </Grow>  
-            {console.log(id)}
             </Container>
 
 

@@ -8,6 +8,8 @@ const initialState={
     serviceForm:[],
     filterCat:"All",
     order:[],
+    history:[],
+    service:[],
     error:''
 }
 
@@ -58,7 +60,27 @@ export const serviceRequest=createAsyncThunk("user/serviceRequest",async(service
     }
 })
 
+export const orderHistory=createAsyncThunk("user/orderHistory",async(mail)=>{
+    try{
+        console.log(mail);
+        const response=await api.orderHistory(mail);
+        return response.data;
+    }
+    catch(error){
+        console.log(error);
+    }
+})
 
+export const serviceHistory=createAsyncThunk("user/serviceHistory",async(mail)=>{
+    try{
+        console.log(mail);
+        const response=await api.serviceHistory(mail);
+        return response.data;
+    }
+    catch(error){
+        console.log(error);
+    }
+})
 
 const userSlice=createSlice({
     name:"FOR USER",
@@ -136,6 +158,29 @@ const userSlice=createSlice({
         })//POST PRODUCT ORDER TO DATABASE
 
 
+        builder.addCase(orderHistory.pending,(state)=>{
+            state.loading="true";
+        })
+        builder.addCase(orderHistory.fulfilled,(state,action)=>{
+            state.history=action.payload;
+            state.loading="false";
+        })
+        builder.addCase(orderHistory.rejected,(state,action)=>{
+            state.loading="true";
+            state.error=action.error.message;
+        })//SHOW ORDER HISTORY
+
+        builder.addCase(serviceHistory.pending,(state)=>{
+            state.loading="true";
+        })
+        builder.addCase(serviceHistory.fulfilled,(state,action)=>{
+            state.service=action.payload;
+            state.loading="false";
+        })
+        builder.addCase(serviceHistory.rejected,(state,action)=>{
+            state.loading="true";
+            state.error=action.error.message;
+        })//SHOW SERVICE HISTORY
     }
 });
 

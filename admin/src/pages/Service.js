@@ -8,7 +8,7 @@ const Service = () => {
   const dispatch=useDispatch();
   const status=useSelector((state)=>state.checking.filterStatus);
 
-  const services=useSelector((state)=>state.checking.services);
+  const services=useSelector(state=>state.checking.services);
 
   const spreadedService=[...services];
 
@@ -20,8 +20,8 @@ const Service = () => {
   })
 
   useEffect(()=>{
-    dispatch(showService());
-  },[])
+    dispatch(showService())
+  },[services])
 
   return (
     <Container>
@@ -29,7 +29,6 @@ const Service = () => {
      {filteredService.map((services)=>
       <Servicelist key={services._id} services={services}/>
       )} 
-    {console.log(filteredService)}
    </Container>
   )
 }

@@ -7,18 +7,19 @@ import { updateCat, updateStock } from '../../redux/features/checkSlice';
 const Productfilter = () => {
     const dispatch=useDispatch();
     const initialCat=useSelector((state)=>state.checking.filterCat);
+    const initalStock=useSelector((state)=>state.checking.filterStock);
     const [catStatus,setCatStatus]=useState(initialCat);
 
-    const initalStock=useSelector((state)=>state.checking.filterStock);
     const [stockStatus,setStockStatus]=useState(initalStock);
     
     function filterCat(e){
+
       setCatStatus(e.target.value);
       dispatch(updateCat(e.target.value));
     }
     function filterStock(e){
       setStockStatus(e.target.value);
-      setCatStatus(e.target.value);
+      // setCatStatus(e.target.value);
       dispatch(updateStock(e.target.value));
     }
 
@@ -53,7 +54,7 @@ const Productfilter = () => {
           </Select>
           
         </FormControl>
-        <Button variant="contained" sx={{width:"200px",height:"52px"}}>FILTER</Button>
+        {/* <Button variant="contained" sx={{width:"200px",height:"52px"}}>FILTER</Button> */}
     </Container>
   )
 }

@@ -22,14 +22,13 @@ const Orderedpc = () => {
 
   useEffect(()=>{
     dispatch(showOrders());
-  },[])
+  },[orders])
   return (
     <Container>
       <Servicefilter/>
       {filteredOrders.map((orders)=>
       <Orderlist key={orders._id} orders={orders}/>
       )} 
-    {console.log(filteredOrders)}
     </Container>
   )
 }

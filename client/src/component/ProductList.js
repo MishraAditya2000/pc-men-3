@@ -14,7 +14,7 @@ export const ProductList = ({products}) => {
         isMatch?(
           <Grid container>
             <Grid item md={8} sm={12}>
-              <Card sx={{ maxWidth: 345 }}>
+              <Card sx={{ maxWidth: 345,mt:"8px",mb:"8px" }}>
                 <CardMedia
                   component="img"
                   height="280"
@@ -29,7 +29,7 @@ export const ProductList = ({products}) => {
                    {products.subtitle}
                   </Typography>
                   <Typography variant="body2" color="text.primary">
-                   Price:{products.price}/-
+                   Price:₹{products.price}/-
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -64,12 +64,9 @@ export const ProductList = ({products}) => {
                   <Typography variant="body1">Storage:{products?.customspecs?.storage?.default?.size}</Typography>
                   </CardContent>
               <CardContent>
-                <Typography>Price:{products.price}/-</Typography>
+                <Typography>Price:₹{products.price}/-</Typography>
+                <Button component={Link} to={`/details/${products._id}`} size="large" variant='outlined'>View Details</Button>
               </CardContent>
-              <CardActions>
-                {/* <Link to={`/details/${products._id}`}>View Details</Link> */}
-                <Button component={Link} to={`/details/${products._id}`} >View Details</Button>
-              </CardActions>
             </Card>
           </Grid>
       </Grid>

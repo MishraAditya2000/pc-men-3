@@ -10,9 +10,11 @@ import AboutUs from "../pages/Aboutus";
 import Prebuiltpc from "../pages/Prebuiltpc";
 import Home from "../pages/Home";
 import { ProductDetails } from "../pages/ProductDetails";
-import { Ordersuccess } from "../pages/Ordersuccess";
 import Login from "../pages/login/login";
 import Register from "../pages/register/register";
+import { Orderhistory } from "../pages/Orderhistory";
+import { Servicehistory } from "../pages/Servicehistory";
+
 
 const Header=()=>{
     const [value,SetValue]=useState(false);
@@ -28,7 +30,7 @@ const Header=()=>{
                 <AppBar position="relative">
                     <Toolbar>
                     <ComputerIcon sx={{marginLeft:"8px"}}/>
-                    <Typography variant="body1" sx={{marginLeft:"8px",fontSize:"22px"}}> PC Mender</Typography>       
+                    <Typography variant="body1" sx={{marginLeft:"8px",fontSize:"22px"}}>PC Mender-PC Sale & Service</Typography>       
 
 
                         {
@@ -67,9 +69,10 @@ const Header=()=>{
                             <Route path="#service" element={<Home/>}/>
                             <Route path="/aboutus" element={<AboutUs/>}/>
                             <Route path="/details/:productId" element={<ProductDetails/>}/>
-                            <Route path="/ordersuccessful" element={<Ordersuccess/>}/>
+                            <Route path="/servicehistory" element={<Servicehistory/>}/>
                             <Route path="/login" element={<Login setLoginUser={setLoginUser}/>} />
                             <Route path="/register" element={<Register/>}/>
+                            <Route path="/orderhistory" element={<Orderhistory/>}/>
                 </Routes> 
             </React.Fragment>
         </div>

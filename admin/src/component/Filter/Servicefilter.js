@@ -21,7 +21,9 @@ const Servicefilter = () => {
         >
           <MenuItem value="all">All</MenuItem>
           <MenuItem value="Booked">Booked</MenuItem>
+          <MenuItem value="On Process">On Process</MenuItem>
           <MenuItem value="Delivered">Delivered</MenuItem>
+          <MenuItem value="Cancelled">Cancelled</MenuItem>
           </Select>
         </FormControl>
    </Container>
