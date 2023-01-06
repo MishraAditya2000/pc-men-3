@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer=()=>{
     return(
-         <Container maxWidth='xl' sx={{marginTop:"18px",paddingTop:"18px",borderTop:1,borderWidth:"64px",borderColor:"#0288D1"}}>
+         <Container maxWidth='xxl' sx={{marginTop:"18px",paddingTop:"18px",borderTop:1,borderWidth:"64px",borderColor:"#1976D2"}}>
             {/* <Paper bgclor="#0288D1"> */}
 
             <Grid container  spacing={3} sx={{paddingBottom:"18px"}} elevation={0}>
